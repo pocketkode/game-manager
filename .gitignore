@@ -1,0 +1,19 @@
+# Build output (package, staging)
+dist/
+
+# Python
+__pycache__/
+*.pyc
+*.so
+
+# Made on the handheld / when testing: settings, installed games list, logs
+config.ini
+data/
+logs/
+cookies.txt
+
+# Release files (published on GitHub and pocketkode.com, not in the repo)
+release/
+
+# macOS
+.DS_Store

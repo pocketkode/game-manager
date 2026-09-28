@@ -1,0 +1,19 @@
+[general]
+; Set to yes if A and B feel backwards
+swap_ab = no
+
+; Where games are installed. Each system goes in its own folder (GB, GBA, NES…),
+; reusing the folders you already have. SD card 2 is /mnt/sdcard/ROMS
+roms_path = /mnt/mmc/ROMS
+
+; Hide itch.io games whose downloads are only for PC or phones
+hide_pc_only = yes
+
+; Also list demos and tech demos from Homebrew Hub, not just games
+include_demos = no
+
+[itch]
+; Browsing itch.io works without this. Downloading needs your own free API key:
+; log in on a computer, open https://itch.io/user/settings/api-keys,
+; click "Generate new API key" and paste it after the = sign.
+api_key =

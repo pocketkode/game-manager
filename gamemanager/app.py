@@ -28,7 +28,8 @@ from .systems import BY_ID, Device
 from .tasks import Task
 from .ui import C, H, UI, W
 
-APP_VERSION = "2.0.0"
+APP_VERSION = "2.0.1"
+net.USER_AGENT = net.user_agent(APP_VERSION)
 
 HEADER_H = 44
 FOOTER_H = 34
@@ -1373,7 +1374,7 @@ class SettingsScreen(MenuList):
                 app.updater.state, app.updater.info = None, None
             app.push(UpdateScreen(app))
         elif key == "privacy":
-            app.push(MessageScreen(app, _("Privacy"), _("Game Manager never reads or sends your saves, screenshots or files, and doesn't track what you play.\nFor updates it reads the latest release on GitHub (you can turn this off in Settings). It sends nothing about you or the handheld.\nTo list and download games it connects to Homebrew Hub, itch.io, PortMaster (GitHub) and the libretro box-art library; your searches go to those sites, and your itch.io API key only to itch.io.\nNo ads, no analytics, no tracking.")))
+            app.push(MessageScreen(app, _("Privacy"), _("Game Manager never reads or sends your saves, screenshots or files, and doesn't track what you play.\nFor updates it reads the latest release on GitHub (you can turn this off in Settings); an update you choose to install is downloaded from pocketkode.com. It sends nothing about you or the handheld.\nTo list and download games it connects to Homebrew Hub, itch.io, PortMaster (GitHub) and the libretro box-art library; your searches go to those sites, and your itch.io API key only to itch.io.\nNo ads, no analytics, no tracking.")))
         elif key == "about":
             app.push(MessageScreen(app, f"Game Manager {APP_VERSION}",
                                    _("Games come from Homebrew Hub, itch.io and "
@@ -1381,7 +1382,7 @@ class SettingsScreen(MenuList):
                                      "Nothing is hosted by this app, and it isn't affiliated with any of them. Games "
                                      "belong to their creators.\nTested on Anbernic RG40XXH with muOS 2601.0 Jacaranda.\n"
                                      "© 2026 PocketKode · see LICENSE and the licenses/ folder.\n{url}",
-                                     url="github.com/" + updater.REPO)))
+                                     url="pocketkode.com/apps/game-manager")))
 
 
 class KeyboardScreen(Screen):

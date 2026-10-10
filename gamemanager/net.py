@@ -10,7 +10,12 @@ import urllib.error
 import urllib.parse
 import urllib.request
 
-USER_AGENT = "Mozilla/5.0 (X11; Linux aarch64) GameManager/1.3 (muOS; +https://github.com/pocketkode/game-manager)"
+def user_agent(version):
+    """How the app introduces itself to the sites it reads (set from APP_VERSION when the app starts)."""
+    return f"Mozilla/5.0 (X11; Linux aarch64) GameManager/{version} (muOS; +https://pocketkode.com/apps/game-manager/)"
+
+
+USER_AGENT = user_agent("2")
 
 
 class NetError(Exception):

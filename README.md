@@ -19,7 +19,8 @@ more — is on **[pocketkode.com/apps/game-manager](https://pocketkode.com/apps/
 ## Privacy
 
 Game Manager never reads or sends your saves, screenshots or files, and doesn't track what you play. For updates it
-reads the latest release on GitHub (switchable in **START → Settings**); it sends nothing about you or the handheld.
+reads the latest release on GitHub (switchable in **START → Settings**), and an update you choose to install is
+downloaded from pocketkode.com; it sends nothing about you or the handheld.
 To list and download games it connects to Homebrew Hub, itch.io, PortMaster (GitHub) and the libretro box-art library;
 your searches go to those sites, and your itch.io API key only to itch.io. No ads, no analytics, no tracking.
 

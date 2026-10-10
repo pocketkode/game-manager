@@ -1,0 +1,26 @@
+[general]
+; Set to yes if A and B feel backwards
+swap_ab = no
+
+; Where games are installed. Each system goes in its own folder (GB, GBA, NES…),
+; reusing the folders you already have. SD card 2 is /mnt/sdcard/ROMS
+roms_path = /mnt/mmc/ROMS
+
+; Hide itch.io games whose downloads are only for PC or phones
+hide_pc_only = yes
+
+; Also list demos and tech demos from Homebrew Hub, not just games
+include_demos = no
+
+; Panic exit while a game is running: hold this button combo for a moment to force a game
+; to quit (handy for homebrew or ports that have no exit of their own). Default: SELECT+START.
+; The numbers are the gamepad's evdev key codes; change them only if the exit doesn't work on
+; your device (see logs/tryit.log). Set to "off" to turn it off. exit_hold is the seconds to hold.
+exit_combo = 314, 315
+exit_hold = 2
+
+[itch]
+; Browsing itch.io works without this. Downloading needs your own free API key:
+; log in on a computer, open https://itch.io/user/settings/api-keys,
+; click "Generate new API key" and paste it after the = sign.
+api_key =

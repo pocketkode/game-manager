@@ -26,7 +26,7 @@ your searches go to those sites, and your itch.io API key only to itch.io. No ad
 
 ## Build
 
-`bash build.sh` (needs Docker, curl, unzip, zip and python3) produces `dist/GameManager.muxapp` — the app's Python
+`bash build.sh` (needs bash, curl, unzip, zip and python3; no Docker) produces `dist/GameManager.muxapp` — the app's Python
 source as it is, plus PySDL2 and the fonts. The settings in `config.ini` are documented in `config.ini.example`.
 
 ## Third-party

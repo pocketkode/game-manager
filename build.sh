@@ -75,7 +75,7 @@ done
 echo "==> Assembling app folder"
 rm -rf "$DIST/stage"
 mkdir -p "$STAGE/deps" "$STAGE/fonts" "$STAGE/glyph" "$STAGE/licenses" "$STAGE/lang" "$STAGE/gamemanager"
-cp "$SRC/main.py" "$SRC/mux_launch.sh" "$SRC/mux_lang.ini" "$SRC/config.ini.example" "$SRC/README.md" "$SRC/LICENSE" "$STAGE/"
+cp "$SRC/main.py" "$SRC/mux_launch.sh" "$SRC/mux_lang.ini" "$SRC/config.ini.example" "$SRC/README.md" "$SRC/LICENSE" "$SRC/NOTICE" "$STAGE/"
 cp "$SRC"/gamemanager/*.py "$STAGE/gamemanager/"
 cp "$SRC"/lang/*.json "$STAGE/lang/"
 cp "$SRC"/licenses/* "$STAGE/licenses/"

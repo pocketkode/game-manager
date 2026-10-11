@@ -125,7 +125,7 @@ Game Manager is an independent project, not affiliated with or endorsed by any o
 ## License
 
 © 2026 PocketKode. Game Manager is free software under the **GNU General Public License v3** (GPL-3.0-only): you may
-use, study, change and share it under that license; see [LICENSE](LICENSE). Bundled third-party parts keep their own
+use, study, change and share it under that license; see [LICENSE](LICENSE) and [NOTICE](NOTICE). Bundled third-party parts keep their own
 licenses (see the `licenses/` folder).
 
 The name "PocketKode", the name "Game Manager" as used by PocketKode, and the PocketKode and app icons are not covered

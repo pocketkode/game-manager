@@ -8,6 +8,8 @@ tracking (itch.io downloads need your own free itch.io API key).
 |---|---|
 | ![Home screen](screenshots/home.png) | ![A game's page](screenshots/game-page.png) |
 | ![PortMaster ports](screenshots/portmaster.png) | ![Sort and filter](screenshots/sort-filter.png) |
+| ![Search your SD card and all the sources](screenshots/search-sd.png) | ![My games](screenshots/my-games.png) |
+| ![Recently played, with favourites](screenshots/recently-played.png) | ![PortMaster ports on the SD card](screenshots/ports-shelf.png) |
 
 - **Three sources**: Homebrew Hub (Game Boy, GBC, GBA and NES homebrew), itch.io (homebrew for NES, SNES, Game Boy, GBA, Mega Drive and more, plus your own library) and PortMaster ports.
 - **Checks every game** before and after downloading, and installs into the ROM folders muOS already uses, with box art and a description.

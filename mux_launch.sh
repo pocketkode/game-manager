@@ -2,7 +2,7 @@
 # HELP: Find, install and manage free homebrew games from Homebrew Hub, itch.io and PortMaster
 # ICON: gamemanager
 # GRID: Game Manager
-# © 2026 PocketKode. All rights reserved.
+# © 2026 PocketKode · SPDX-License-Identifier: GPL-3.0-only
 
 . /opt/muos/script/var/func.sh
 

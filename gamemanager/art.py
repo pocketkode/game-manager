@@ -1,4 +1,4 @@
-# © 2026 PocketKode. All rights reserved.
+# © 2026 PocketKode · SPDX-License-Identifier: GPL-3.0-only
 """Save cover images as PNG box art for muOS (uses the system SDL2_image)."""
 import ctypes
 

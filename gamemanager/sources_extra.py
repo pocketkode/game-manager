@@ -1,4 +1,4 @@
-# © 2026 PocketKode. All rights reserved.
+# © 2026 PocketKode · SPDX-License-Identifier: GPL-3.0-only
 """PortMaster ports as a game catalogue.
 
 Games use the same dict shape as sources.py. Port files carry "install": "port", so the

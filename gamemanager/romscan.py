@@ -1,4 +1,4 @@
-# © 2026 PocketKode. All rights reserved.
+# © 2026 PocketKode · SPDX-License-Identifier: GPL-3.0-only
 """Finds every game in the ROMS folders, grouped by muOS system, and can remove one safely.
 
 A game is either

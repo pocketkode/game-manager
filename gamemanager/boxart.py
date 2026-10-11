@@ -1,4 +1,4 @@
-# © 2026 PocketKode. All rights reserved.
+# © 2026 PocketKode · SPDX-License-Identifier: GPL-3.0-only
 """Box art for any game on the SD card, from the libretro thumbnail library
 (thumbnails.libretro.com, the same images RetroArch uses).
 

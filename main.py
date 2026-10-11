@@ -1,4 +1,4 @@
-# © 2026 PocketKode. All rights reserved.
+# © 2026 PocketKode · SPDX-License-Identifier: GPL-3.0-only
 """Game Manager - download and install homebrew games on muOS. Entry point."""
 import json
 import os

@@ -1,4 +1,4 @@
-# © 2026 PocketKode. All rights reserved.
+# © 2026 PocketKode · SPDX-License-Identifier: GPL-3.0-only
 """Game catalogues: Homebrew Hub (hh3.gbdev.io) and itch.io.
 
 Every game is a dict:

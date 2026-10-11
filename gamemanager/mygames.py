@@ -1,4 +1,4 @@
-# © 2026 PocketKode. All rights reserved.
+# © 2026 PocketKode · SPDX-License-Identifier: GPL-3.0-only
 """Extra information about the games on the SD card: play time (from muOS's tracker),
 favourites, the core chosen in muOS, and box art downloads."""
 import json

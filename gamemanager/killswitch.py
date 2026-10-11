@@ -1,4 +1,4 @@
-# © 2026 PocketKode. All rights reserved.
+# © 2026 PocketKode · SPDX-License-Identifier: GPL-3.0-only
 """A panic exit while a game is running.
 
 Once a game starts, the emulator owns the screen and the gamepad, so the app can't see button presses

@@ -1,4 +1,4 @@
-# © 2026 PocketKode. All rights reserved.
+# © 2026 PocketKode · SPDX-License-Identifier: GPL-3.0-only
 """Screens and main loop for Game Manager."""
 import configparser
 import os
@@ -28,7 +28,7 @@ from .systems import BY_ID, Device
 from .tasks import Task
 from .ui import C, H, UI, W
 
-APP_VERSION = "2.0.1"
+APP_VERSION = "2.0.2"
 net.USER_AGENT = net.user_agent(APP_VERSION)
 
 HEADER_H = 44

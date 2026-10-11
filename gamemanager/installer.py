@@ -1,4 +1,4 @@
-# © 2026 PocketKode. All rights reserved.
+# © 2026 PocketKode · SPDX-License-Identifier: GPL-3.0-only
 """Download → unpack → check → install into ROMS, plus the list of installed games."""
 import hashlib
 import json

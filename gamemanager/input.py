@@ -1,4 +1,4 @@
-# © 2026 PocketKode. All rights reserved.
+# © 2026 PocketKode · SPDX-License-Identifier: GPL-3.0-only
 """Gamepad + keyboard input for muOS (SDL2 GameController API)."""
 import ctypes
 import time

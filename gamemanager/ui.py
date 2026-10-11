@@ -1,4 +1,4 @@
-# © 2026 PocketKode. All rights reserved.
+# © 2026 PocketKode · SPDX-License-Identifier: GPL-3.0-only
 """SDL2 renderer helpers: window, fonts (with per-glyph fallback), text cache, images."""
 import ctypes
 import math

@@ -1,8 +1,7 @@
 # Game Manager
 
 **Find, install and manage free homebrew games on muOS handhelds**, from Homebrew Hub, itch.io and PortMaster, right on the
-game console. Checks each game can run on your device before installing it. Free. No PocketKode account, no ads, no
-tracking (itch.io downloads need your own free itch.io API key).
+game console. Checks each game can run on your device before installing it.
 
 | | |
 |---|---|

@@ -29,7 +29,7 @@ from .systems import BY_ID, Device
 from .tasks import Task
 from .ui import C, H, UI, W
 
-APP_VERSION = "2.0.2"
+APP_VERSION = "2.0.3"
 net.USER_AGENT = net.user_agent(APP_VERSION)
 
 HEADER_H = 44

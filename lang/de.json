@@ -249,7 +249,9 @@
     "start or uninstall": "starten oder deinstallieren",
     "No ports installed yet.": "Noch keine Ports installiert.",
     "Uninstall port?": "Port deinstallieren?",
-    "Remove the PortMaster port “{name}” ({where}) and its files?\nYour save files are kept.": "Den PortMaster-Port „{name}“ ({where}) und seine Dateien entfernen?\nDeine Spielstände bleiben erhalten."
+    "Remove the PortMaster port “{name}” ({where}) and its files?\nYour save files are kept.": "Den PortMaster-Port „{name}“ ({where}) und seine Dateien entfernen?\nDeine Spielstände bleiben erhalten.",
+    "Offline · saved {ago}": "Offline · gespeichert {ago}",
+    "Couldn't reach {sites}": "{sites} nicht erreichbar"
   },
   "patterns": {
     "(\\d+) h (\\d+) min": "\\1 h \\2 min",

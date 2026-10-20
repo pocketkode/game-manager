@@ -249,7 +249,9 @@
     "start or uninstall": "启动或卸载",
     "No ports installed yet.": "还没有安装移植。",
     "Uninstall port?": "卸载移植？",
-    "Remove the PortMaster port “{name}” ({where}) and its files?\nYour save files are kept.": "删除 PortMaster 移植“{name}”（{where}）及其文件？\n你的存档会保留。"
+    "Remove the PortMaster port “{name}” ({where}) and its files?\nYour save files are kept.": "删除 PortMaster 移植“{name}”（{where}）及其文件？\n你的存档会保留。",
+    "Offline · saved {ago}": "离线 · {ago}保存的列表",
+    "Couldn't reach {sites}": "无法连接 {sites}"
   },
   "patterns": {
     "(\\d+) h (\\d+) min": "\\1 小时 \\2 分钟",

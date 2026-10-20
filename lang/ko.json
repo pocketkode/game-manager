@@ -249,7 +249,9 @@
     "start or uninstall": "시작 또는 제거",
     "No ports installed yet.": "아직 설치된 포트가 없습니다.",
     "Uninstall port?": "포트를 제거할까요?",
-    "Remove the PortMaster port “{name}” ({where}) and its files?\nYour save files are kept.": "PortMaster 포트 “{name}”({where})와 관련 파일을 삭제할까요?\n저장 파일은 유지됩니다."
+    "Remove the PortMaster port “{name}” ({where}) and its files?\nYour save files are kept.": "PortMaster 포트 “{name}”({where})와 관련 파일을 삭제할까요?\n저장 파일은 유지됩니다.",
+    "Offline · saved {ago}": "오프라인 · {ago} 저장한 목록",
+    "Couldn't reach {sites}": "{sites}에 연결할 수 없음"
   },
   "patterns": {
     "(\\d+) h (\\d+) min": "\\1시간 \\2분",

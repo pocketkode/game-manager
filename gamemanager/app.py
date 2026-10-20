@@ -21,6 +21,7 @@ from . import mygames
 from . import net
 from . import romscan
 from .input import Input
+from .listcache import ListCache
 from .i18n import _, tr
 from .sources import GENRES, HomebrewHub, Itch, fetch_file_sizes, fetch_rating
 from .sources_extra import PortMaster
@@ -377,7 +378,8 @@ class HomeScreen(MenuList):
             app.push(GameListScreen(app, src.NAME, lambda page, sort, genre: src.browse(sid, page, sort, genre),
                                     sorts=src.SORTS, server_sorts=src.SERVER_SORTS, genres=src.GENRES))
         elif key == "itchlib":
-            app.push(GameListScreen(app, _("My itch.io library"), lambda page, sort, genre: app.itch.library(page),
+            app.push(GameListScreen(app, _("My itch.io library"),
+                                    app.lists.wrap("itchlib", lambda page, sort, genre: app.itch.library(page)),
                                     sorts=[("owned", "Newest first"), ("top", "Top rated first"), ("az", "A to Z")],
                                     server_sorts={"owned"}))
         elif key == "search":
@@ -422,8 +424,10 @@ class SystemScreen(MenuList):
         src = self.source
         sorts = getattr(src, "SORTS", None) or SORT_OPTIONS["hbh" if src is self.app.hbh else "itch"]
         genres = GENRES if src in (self.app.hbh, self.app.itch) else None
+        key = "hbh" if src is self.app.hbh else "itch"
         self.app.push(GameListScreen(self.app, f"{self.TITLE} · {BY_ID[sid].name}",
-                                     lambda page, sort, genre: src.browse(sid, page, sort, genre),
+                                     self.app.lists.wrap(f"{key}:{sid}",
+                                                         lambda page, sort, genre: src.browse(sid, page, sort, genre)),
                                      sorts=sorts, sort=self.sort or sorts[0][0],
                                      server_sorts=src.SERVER_SORTS, genres=genres))
 
@@ -456,6 +460,7 @@ class GameListScreen(Screen):
         self.sel_key = None
         self.top = 0
         self.auto_loads = 0
+        self.note = {}  # {"saved": time of the oldest saved page shown, "failed": [sites not reached]}
         self.load_more()
 
     @property
@@ -502,7 +507,12 @@ class GameListScreen(Screen):
                 self.error = t.error
                 self.more = False
             elif t.result:
-                games, more, total = t.result
+                games, more, total = t.result[:3]
+                note = t.result[3] if len(t.result) > 3 else None
+                if note and note.get("saved"):
+                    self.note["saved"] = min(self.note.get("saved") or note["saved"], note["saved"])
+                if note and note.get("failed"):
+                    self.note["failed"] = sorted(set(self.note.get("failed") or []) | set(note["failed"]))
                 known = {g["key"] for g in self.games}
                 self.games += [g for g in games if g["key"] not in known]
                 self.more = more and bool(games)
@@ -562,7 +572,8 @@ class GameListScreen(Screen):
             sort_label = _("Rated first")
         count = _("{n} games", n=self.total) if self.total else (_("{n} shown", n=len(games)) if games else "")
         count = " · ".join(x for x in (sort_label if self.sort != self.sorts[0][0] else "", count) if x)
-        draw_header(ui, self.title, count)
+        note = self.note_text()
+        draw_header(ui, self.title, note or count)
         area_top = HEADER_H + 4
         visible = (H - FOOTER_H - area_top) // self.ROW_H
         sel = self._index(games)
@@ -610,6 +621,14 @@ class GameListScreen(Screen):
         local = games and games[sel]["src"] == "local"
         draw_footer(ui, [("A", _("Start") if local else _("Details")), ("Y", _("Sort & filter")), ("X", _("Search")),
                          ("B", _("Back"))])
+
+    def note_text(self):
+        """Shown in the header instead of the count: the list is a saved copy, or some sites weren't reached."""
+        if self.note.get("saved"):
+            return _("Offline · saved {ago}", ago=tr(mygames.fmt_ago(self.note["saved"])))
+        if self.note.get("failed"):
+            return _("Couldn't reach {sites}", sites=", ".join(self.note["failed"]))
+        return ""
 
     def badge(self, g):
         return game_badge(self.app, g)
@@ -1657,6 +1676,7 @@ class App:
             roms = self.device.roms_path
             self.pm = PortMaster(cache, os.path.join(os.path.dirname(roms), "ports"), os.path.join(roms, "Ports"))
         self.sources = {"hbh": self.hbh, "itch": self.itch, "pm": self.pm}
+        self.lists = ListCache(os.path.join(cache, "lists"))  # saved lists, shown when a site can't be reached
         self.library = installer.Library(os.path.join(app_dir, "data", "installed.json"))
         self.playtime = mygames.Playtime(self.device.info_dir, app_dir)
         self.favs = mygames.Favourites(os.path.join(app_dir, "data", "favourites.json"))
@@ -1713,19 +1733,29 @@ class App:
 
         extra = [self.pm] + ([itch] if itch.has_key else [])
 
+        searches = [(src, self.lists.wrap(f"search:{src.NAME}:{text.lower()}",
+                                          lambda page, sort, genre, src=src: src.search(text, page)))
+                    for src in [hbh] + extra]
+
         def loader(page, sort, genre):
             # Games already on the SD card come first (and are found offline too)
             local = self.local_matches(text) if page == 1 else []
             games, more, total, error = [], False, None, None
-            for src in [hbh] + extra:
+            note = {}
+            for src, search in searches:
                 try:
-                    g2, more2, total2 = src.search(text, page)
-                    games, more, total = games + g2, more or more2, None if games else total2
-                except net.NetError as e:
+                    r = search(page, None, None)
+                except net.NetError as e:  # the other sites' results are still shown, and this one is named
                     error = error or e
-            if error and not games and not local:
-                raise error
-            return local + games, more, None if local else total
+                    note.setdefault("failed", []).append(src.NAME)
+                    continue
+                g2, more2, total2 = r[:3]
+                games, more, total = games + g2, more or more2, None if games else total2
+                if len(r) > 3 and r[3].get("saved"):
+                    note["saved"] = min(note.get("saved") or r[3]["saved"], r[3]["saved"])
+            if error and not games and not local and len(note["failed"]) == len(searches):
+                raise error  # no site could be reached
+            return local + games, more, None if local else total, note
 
         self.push(GameListScreen(self, _("Search: {text}", text=text), loader, sorts=SORT_OPTIONS["search"],
                                  server_sorts={"relevance"}))

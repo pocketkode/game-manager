@@ -1,7 +1,9 @@
 # © 2026 PocketKode · SPDX-License-Identifier: GPL-3.0-only
 """HTTP helpers (standard library only) with plain-English errors."""
+import http.client
 import json
 import os
+import re
 import socket
 import ssl
 import threading
@@ -78,6 +80,18 @@ def _request(url, headers):
     return urllib.request.Request(url, headers=h)
 
 
+RETRY_HTTP = (500, 502, 503, 504)  # a busy or restarting server: usually fine a moment later
+
+
+def _glitch(e, attempt):
+    """A short network glitch worth trying again: a dropped connection (up to twice) or a time-out (once).
+    No internet at all, or a certificate problem, is reported at once."""
+    reason = getattr(e, "reason", e)
+    if isinstance(reason, (socket.timeout, TimeoutError)) or "timed out" in str(reason).lower():
+        return attempt == 0
+    return isinstance(reason, (ConnectionResetError, ConnectionAbortedError, BrokenPipeError))
+
+
 def open_url(url, headers=None, timeout=20, opener=None):
     for attempt in range(3):
         _throttle(url)
@@ -88,8 +102,14 @@ def open_url(url, headers=None, timeout=20, opener=None):
             if e.code == 429 and attempt < 2:
                 time.sleep(_retry_after(e, attempt))
                 continue
+            if e.code in RETRY_HTTP and attempt < 2:
+                time.sleep(1.5 * (attempt + 1))
+                continue
             raise NetError(friendly(e), e.code) from e
         except (urllib.error.URLError, OSError) as e:
+            if attempt < 2 and _glitch(e, attempt):
+                time.sleep(1.0 * (attempt + 1))
+                continue
             raise NetError(friendly(e)) from e
 
 
@@ -143,30 +163,67 @@ def redirect_target(url, headers=None, timeout=20):
         raise NetError(friendly(e)) from e
 
 
+RESUMES = 3  # how many times a download that stopped part-way carries on from where it stopped
+
+
+def _resumed_at(r):
+    """Where a 206 (partial) reply starts, from Content-Range: bytes 1000-1999/2000 → 1000; else None."""
+    if getattr(r, "status", 200) != 206:
+        return None
+    m = re.match(r"bytes (\d+)-", r.headers.get("Content-Range") or "")
+    return int(m.group(1)) if m else None
+
+
 def download(url, dest, task, headers=None, timeout=30, max_size=512 * 1024 * 1024):
-    """Stream `url` to `dest` (via dest.part), updating task.progress. Returns bytes written."""
+    """Stream `url` to `dest` (via dest.part), updating task.progress. Returns bytes written.
+    If the connection drops part-way, the download carries on from where it stopped (asking the server
+    for the rest with a Range request), or starts again if the server can't do that."""
     part = dest + ".part"
-    done = 0
+    done, total, resumes = 0, 0, 0
     try:
-        with open_url(url, headers, timeout) as r, open(part, "wb") as f:
-            total = int(r.headers.get("Content-Length") or 0)
-            if total > max_size:
-                raise NetError(f"The file is too big ({total // (1024 * 1024)} MB).")
+        with open(part, "wb") as f:
             while True:
-                task.check()
-                try:
-                    chunk = r.read(64 * 1024)
-                except (OSError, ValueError) as e:
-                    raise NetError(friendly(e)) from e
-                if not chunk:
-                    break
-                f.write(chunk)
-                done += len(chunk)
-                if done > max_size:
-                    raise NetError("The file is bigger than this app allows (512 MB).")
-                task.progress = done / total if total else None
-        if total and done < total:
-            raise NetError("The download stopped early. Check Wi-Fi and try again.")
+                h = dict(headers or {})
+                if done:
+                    h["Range"] = f"bytes={done}-"
+                with open_url(url, h, timeout) as r:
+                    if done and _resumed_at(r) != done:  # the server sent the whole file again
+                        f.seek(0)
+                        f.truncate()
+                        done = 0
+                    if not done:
+                        total = int(r.headers.get("Content-Length") or 0)
+                        if total > max_size:
+                            raise NetError(f"The file is too big ({total // (1024 * 1024)} MB).")
+                    try:
+                        while True:
+                            task.check()
+                            try:
+                                chunk = r.read(64 * 1024)
+                            except (OSError, ValueError, http.client.HTTPException) as e:
+                                raise NetError(friendly(e)) from e
+                            if not chunk:
+                                break
+                            f.write(chunk)
+                            done += len(chunk)
+                            if done > max_size:
+                                raise NetError("The file is bigger than this app allows (512 MB).")
+                            task.progress = done / total if total else None
+                    except NetError:
+                        if total and done == total:
+                            pass  # it dropped after the last byte: the file is complete
+                        elif not (done and resumes < RESUMES) or done > max_size:
+                            raise
+                        else:
+                            resumes += 1
+                            time.sleep(1.0)
+                            continue
+                if total and done < total:
+                    if resumes < RESUMES:
+                        resumes += 1
+                        continue
+                    raise NetError("The download stopped early. Check Wi-Fi and try again.")
+                break
         os.replace(part, dest)
         return done
     finally:

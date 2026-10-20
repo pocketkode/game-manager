@@ -249,7 +249,9 @@
     "start or uninstall": "запуск или удаление",
     "No ports installed yet.": "Портов пока нет.",
     "Uninstall port?": "Удалить порт?",
-    "Remove the PortMaster port “{name}” ({where}) and its files?\nYour save files are kept.": "Удалить порт PortMaster «{name}» ({where}) и его файлы?\nВаши сохранения останутся."
+    "Remove the PortMaster port “{name}” ({where}) and its files?\nYour save files are kept.": "Удалить порт PortMaster «{name}» ({where}) и его файлы?\nВаши сохранения останутся.",
+    "Offline · saved {ago}": "Нет сети · сохранено {ago}",
+    "Couldn't reach {sites}": "Нет связи с {sites}"
   },
   "patterns": {
     "(\\d+) h (\\d+) min": "\\1 ч \\2 мин",

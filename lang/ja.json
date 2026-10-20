@@ -249,7 +249,9 @@
     "start or uninstall": "起動またはアンインストール",
     "No ports installed yet.": "まだ移植版がありません。",
     "Uninstall port?": "移植版をアンインストールしますか？",
-    "Remove the PortMaster port “{name}” ({where}) and its files?\nYour save files are kept.": "PortMaster の移植版「{name}」（{where}）とそのファイルを削除しますか？\nセーブデータは残ります。"
+    "Remove the PortMaster port “{name}” ({where}) and its files?\nYour save files are kept.": "PortMaster の移植版「{name}」（{where}）とそのファイルを削除しますか？\nセーブデータは残ります。",
+    "Offline · saved {ago}": "オフライン · {ago}に保存した一覧",
+    "Couldn't reach {sites}": "{sites} に接続できません"
   },
   "patterns": {
     "(\\d+) h (\\d+) min": "\\1 時間 \\2 分",

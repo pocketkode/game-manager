@@ -249,7 +249,9 @@
     "start or uninstall": "starten of verwijderen",
     "No ports installed yet.": "Nog geen ports geïnstalleerd.",
     "Uninstall port?": "Port verwijderen?",
-    "Remove the PortMaster port “{name}” ({where}) and its files?\nYour save files are kept.": "De PortMaster-port “{name}” ({where}) en de bijbehorende bestanden verwijderen?\nJe savebestanden blijven behouden."
+    "Remove the PortMaster port “{name}” ({where}) and its files?\nYour save files are kept.": "De PortMaster-port “{name}” ({where}) en de bijbehorende bestanden verwijderen?\nJe savebestanden blijven behouden.",
+    "Offline · saved {ago}": "Offline · opgeslagen {ago}",
+    "Couldn't reach {sites}": "{sites} niet bereikbaar"
   },
   "patterns": {
     "(\\d+) h (\\d+) min": "\\1 u \\2 min",

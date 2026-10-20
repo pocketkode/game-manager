@@ -64,6 +64,7 @@ class PortMaster:
         self.pm_dir = pm_dir or next((d for d in self.PM_DIRS if os.path.isfile(os.path.join(d, "harbourmaster"))), None)
         self._ports = None
         self._device = None
+        self.saved_at = None
 
     # --- what this device can run
     def device(self):
@@ -118,11 +119,22 @@ class PortMaster:
                 pass
         return True
 
+    MAX_AGE = 12 * 3600
+
     def ports(self):
         if self._ports is None:
-            data = _cached_json(self.cache, self.URL, 12 * 3600)
+            data = _cached_json(self.cache, self.URL, self.MAX_AGE)
             self._ports = [p for p in (data.get("ports") or {}).values() if isinstance(p, dict) and self.runs_here(p)]
+            try:  # an old copy means PortMaster couldn't be reached and the saved list is shown
+                saved = os.path.getmtime(self.cache)
+                self.saved_at = saved if time.time() - saved >= self.MAX_AGE else None
+            except OSError:
+                self.saved_at = None
         return self._ports
+
+    def _result(self, items, more, total):
+        games = [self._game(p) for p in items]
+        return (games, more, total, {"saved": self.saved_at}) if self.saved_at else (games, more, total)
 
     # --- lists
     def systems(self):
@@ -137,14 +149,12 @@ class PortMaster:
         else:
             field = "date_updated" if sort == "updated" else "date_added"
             ports = sorted(ports, key=lambda p: (p.get("source") or {}).get(field) or "", reverse=True)
-        items, more, total = _page(ports, page)
-        return [self._game(p) for p in items], more, total
+        return self._result(*_page(ports, page))
 
     def search(self, text, page):
         t = text.lower()
         hits = [p for p in self.ports() if t in ((p.get("attr") or {}).get("title") or p["name"]).lower()]
-        items, more, total = _page(hits, page)
-        return [self._game(p) for p in items], more, total
+        return self._result(*_page(hits, page))
 
     def _game(self, p):
         a = p.get("attr") or {}

@@ -249,7 +249,9 @@
     "start or uninstall": "lancer ou désinstaller",
     "No ports installed yet.": "Aucun portage installé pour l’instant.",
     "Uninstall port?": "Désinstaller le portage ?",
-    "Remove the PortMaster port “{name}” ({where}) and its files?\nYour save files are kept.": "Supprimer le portage PortMaster « {name} » ({where}) et ses fichiers ?\nTes sauvegardes sont conservées."
+    "Remove the PortMaster port “{name}” ({where}) and its files?\nYour save files are kept.": "Supprimer le portage PortMaster « {name} » ({where}) et ses fichiers ?\nTes sauvegardes sont conservées.",
+    "Offline · saved {ago}": "Hors ligne · enregistrée {ago}",
+    "Couldn't reach {sites}": "Impossible de joindre {sites}"
   },
   "patterns": {
     "(\\d+) h (\\d+) min": "\\1 h \\2 min",

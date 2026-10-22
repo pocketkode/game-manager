@@ -197,7 +197,7 @@
     "Update undone": "Обновление отменено",
     "Game Manager is now version {v}. Your games and settings were kept.": "Game Manager теперь версии {v}. Игры и настройки сохранены.",
     "Version {bad} didn't start, so Game Manager went back to {v}. Please email feedback@pocketkode.com.": "Версия {bad} не запустилась, поэтому Game Manager вернулся к {v}. Напишите на feedback@pocketkode.com.",
-    "No internet connection. Turn on Wi-Fi in muOS (Configuration → Network) and try again.": "Нет подключения к интернету. Включите Wi-Fi в muOS (Configuration → Network) и попробуйте снова.",
+    "No internet connection. Turn on Wi-Fi in muOS (Configuration → Connectivity → Wi-Fi Network) and try again.": "Нет подключения к интернету. Включите Wi-Fi в muOS (Configuration → Connectivity → Wi-Fi Network) и попробуйте снова.",
     "The connection timed out. Check Wi-Fi and try again.": "Время ожидания истекло. Проверьте Wi-Fi и попробуйте снова.",
     "Secure connection failed. Make sure the date and time are correct in muOS (Configuration → Date and Time), then try again.": "Не удалось установить защищённое соединение. Проверьте дату и время в muOS (Configuration → Date and Time) и попробуйте снова.",
     "Not found on the server (HTTP 404). It may have been removed.": "Не найдено на сервере (HTTP 404). Возможно, удалено.",

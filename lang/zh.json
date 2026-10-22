@@ -197,7 +197,7 @@
     "Update undone": "已撤销更新",
     "Game Manager is now version {v}. Your games and settings were kept.": "Game Manager 现在是 {v} 版。你的游戏和设置都已保留。",
     "Version {bad} didn't start, so Game Manager went back to {v}. Please email feedback@pocketkode.com.": "{bad} 版无法启动，因此 Game Manager 已恢复到 {v}。请发邮件至 feedback@pocketkode.com。",
-    "No internet connection. Turn on Wi-Fi in muOS (Configuration → Network) and try again.": "没有网络连接。请在 muOS 中打开 Wi-Fi（Configuration → Network）后重试。",
+    "No internet connection. Turn on Wi-Fi in muOS (Configuration → Connectivity → Wi-Fi Network) and try again.": "没有网络连接。请在 muOS 中打开 Wi-Fi（Configuration → Connectivity → Wi-Fi Network）后重试。",
     "The connection timed out. Check Wi-Fi and try again.": "连接超时。请检查 Wi-Fi 后重试。",
     "Secure connection failed. Make sure the date and time are correct in muOS (Configuration → Date and Time), then try again.": "安全连接失败。请确认 muOS 中的日期和时间正确（Configuration → Date and Time），然后重试。",
     "Not found on the server (HTTP 404). It may have been removed.": "服务器上找不到（HTTP 404）。可能已被删除。",

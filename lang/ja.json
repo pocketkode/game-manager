@@ -197,7 +197,7 @@
     "Update undone": "アップデートを取り消しました",
     "Game Manager is now version {v}. Your games and settings were kept.": "Game Manager はバージョン {v} になりました。ゲームと設定はそのままです。",
     "Version {bad} didn't start, so Game Manager went back to {v}. Please email feedback@pocketkode.com.": "バージョン {bad} が起動しなかったため、Game Manager は {v} に戻りました。feedback@pocketkode.com までメールしてください。",
-    "No internet connection. Turn on Wi-Fi in muOS (Configuration → Network) and try again.": "インターネットに接続されていません。muOS で Wi-Fi をオンにして（Configuration → Network）、もう一度お試しください。",
+    "No internet connection. Turn on Wi-Fi in muOS (Configuration → Connectivity → Wi-Fi Network) and try again.": "インターネットに接続されていません。muOS で Wi-Fi をオンにして（Configuration → Connectivity → Wi-Fi Network）、もう一度お試しください。",
     "The connection timed out. Check Wi-Fi and try again.": "接続がタイムアウトしました。Wi-Fi を確認してもう一度お試しください。",
     "Secure connection failed. Make sure the date and time are correct in muOS (Configuration → Date and Time), then try again.": "安全な接続に失敗しました。muOS の日付と時刻が正しいか確認してから（Configuration → Date and Time）、もう一度お試しください。",
     "Not found on the server (HTTP 404). It may have been removed.": "サーバーに見つかりません（HTTP 404）。削除された可能性があります。",

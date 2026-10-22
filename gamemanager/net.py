@@ -40,7 +40,7 @@ def friendly(e):
     if isinstance(reason, socket.gaierror) or any(k in low for k in (
             "name or service", "temporary failure in name", "network is unreachable",
             "no address associated", "nodename nor servname", "no route to host")):
-        return "No internet connection. Turn on Wi-Fi in muOS (Configuration → Network) and try again."
+        return "No internet connection. Turn on Wi-Fi in muOS (Configuration → Connectivity → Wi-Fi Network) and try again."
     if isinstance(reason, (socket.timeout, TimeoutError)) or "timed out" in low:
         return "The connection timed out. Check Wi-Fi and try again."
     if isinstance(reason, ssl.SSLError) or "certificate" in low:

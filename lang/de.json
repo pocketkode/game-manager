@@ -197,7 +197,7 @@
     "Update undone": "Update rückgängig gemacht",
     "Game Manager is now version {v}. Your games and settings were kept.": "Game Manager ist jetzt Version {v}. Deine Spiele und Einstellungen sind erhalten geblieben.",
     "Version {bad} didn't start, so Game Manager went back to {v}. Please email feedback@pocketkode.com.": "Version {bad} ist nicht gestartet, daher ist Game Manager zu {v} zurückgekehrt. Bitte schreib an feedback@pocketkode.com.",
-    "No internet connection. Turn on Wi-Fi in muOS (Configuration → Network) and try again.": "Keine Internetverbindung. Schalte WLAN in muOS ein (Configuration → Network) und versuch es noch einmal.",
+    "No internet connection. Turn on Wi-Fi in muOS (Configuration → Connectivity → Wi-Fi Network) and try again.": "Keine Internetverbindung. Schalte WLAN in muOS ein (Configuration → Connectivity → Wi-Fi Network) und versuch es noch einmal.",
     "The connection timed out. Check Wi-Fi and try again.": "Zeitüberschreitung der Verbindung. Prüfe das WLAN und versuch es noch einmal.",
     "Secure connection failed. Make sure the date and time are correct in muOS (Configuration → Date and Time), then try again.": "Sichere Verbindung fehlgeschlagen. Prüfe, ob Datum und Uhrzeit in muOS stimmen (Configuration → Date and Time), und versuch es noch einmal.",
     "Not found on the server (HTTP 404). It may have been removed.": "Auf dem Server nicht gefunden (HTTP 404). Es wurde vielleicht entfernt.",

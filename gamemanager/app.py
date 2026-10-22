@@ -30,6 +30,19 @@ from .tasks import Task
 from .ui import C, H, UI, W
 
 APP_VERSION = "2.0.3"
+
+
+def remove_replaced_sources(app_dir):
+    """From 2.0.3 the package is compiled: installing it over a readable version leaves that version's .py files next
+    to the new .so ones (Python loads the .so). Once this version has started, they go."""
+    pkg = os.path.join(app_dir, "gamemanager")
+    for fn in os.listdir(pkg):
+        if fn.endswith(".py") and fn != "__init__.py" and os.path.isfile(os.path.join(pkg, fn[:-3] + ".so")):
+            try:
+                os.remove(os.path.join(pkg, fn))
+            except OSError:
+                pass
+    shutil.rmtree(os.path.join(pkg, "__pycache__"), ignore_errors=True)
 net.USER_AGENT = net.user_agent(APP_VERSION)
 
 HEADER_H = 44
@@ -1932,5 +1945,6 @@ class App:
             if not self._confirmed:  # the first screen is up: an update that was just installed works
                 self._confirmed = True
                 updater.confirm(self.app_dir)
+                remove_replaced_sources(self.app_dir)
             time.sleep(1 / 30)
         self.ui.close()

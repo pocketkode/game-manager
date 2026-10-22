@@ -91,8 +91,10 @@ More on [pocketkode.com/privacy](https://pocketkode.com/privacy/).
 
 ## Build
 
-`bash build.sh` (needs bash, curl, unzip, zip and python3; no Docker) produces `dist/GameManager.muxapp`: the app's
-Python source as it is, plus PySDL2 and the fonts. The app uses the Python 3 and SDL2 that come with muOS.
+`bash build.sh` (needs bash, curl, unzip, zip, python3 and Docker) produces `dist/GameManager.muxapp`: the app's
+modules compiled to native modules for muOS's Python 3.11 (Cython, in the container from `compile/`), plus PySDL2 and
+the fonts. The package's `NOTICE` says where the source of that exact version is (its tag here). The app uses the
+Python 3 and SDL2 that come with muOS.
 
 ## Third-party components
 

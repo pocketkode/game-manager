@@ -583,7 +583,8 @@ class GameListScreen(Screen):
         sort_label = _(dict(self.sorts).get(self.sort, ""))
         if self.sort not in self.server_sorts and self.sort == "top":
             sort_label = _("Rated first")
-        count = _("{n} games", n=self.total) if self.total else (_("{n} shown", n=len(games)) if games else "")
+        count = ((_("1 game") if self.total == 1 else _("{n} games", n=self.total)) if self.total
+                 else (_("{n} shown", n=len(games)) if games else ""))
         count = " · ".join(x for x in (sort_label if self.sort != self.sorts[0][0] else "", count) if x)
         note = self.note_text()
         draw_header(ui, self.title, note or count)
@@ -1046,7 +1047,7 @@ class MyGamesScreen(MenuList):
 
     def right_text(self):
         n = len(self.all_games())
-        return _("{n} games", n=n) if n else ""
+        return (_("1 game") if n == 1 else _("{n} games", n=n)) if n else ""
 
     def choose(self, key):
         app = self.app

@@ -6,6 +6,7 @@ installer hands them to PortMaster's own harbourmaster instead of treating them 
 """
 import json
 import os
+import re
 import subprocess
 import time
 import urllib.parse
@@ -41,6 +42,23 @@ def _cached_json(path, url, max_age, timeout=60, limit=32 * 1024 * 1024):
 def _page(items, page, per=30):
     start = (page - 1) * per
     return items[start:start + per], start + per < len(items), len(items)
+
+
+# Not offered: apps for watching YouTube or other video sites outside their official apps, which those sites' terms
+# don't allow (for example YTC, "Your Tube Client", added to PortMaster on 2026-10-30). Matched by PortMaster's
+# file name, or by a description that calls the port a YouTube/Twitch client or names yt-dlp, youtube-dl,
+# Invidious or NewPipe.
+HIDDEN_PORTS = {"ytc.zip"}
+_HIDDEN_RE = re.compile(r"\b(?:youtube|twitch)\s+(?:client|app|player|viewer|browser|frontend)\b|\byt-dlp\b|"
+                        r"\byoutube-dl\b|\binvidious\b|\bnewpipe\b", re.I)
+
+
+def hidden(port):
+    """True for a port Game Manager doesn't list (see HIDDEN_PORTS)."""
+    a = port.get("attr") or {}
+    if (port.get("name") or "").lower() in HIDDEN_PORTS:
+        return True
+    return bool(_HIDDEN_RE.search(f"{a.get('title') or ''} {a.get('desc') or ''}"))
 
 
 # ---------------------------------------------------------------- PortMaster
@@ -124,7 +142,8 @@ class PortMaster:
     def ports(self):
         if self._ports is None:
             data = _cached_json(self.cache, self.URL, self.MAX_AGE)
-            self._ports = [p for p in (data.get("ports") or {}).values() if isinstance(p, dict) and self.runs_here(p)]
+            self._ports = [p for p in (data.get("ports") or {}).values() if isinstance(p, dict) and self.runs_here(p)
+                           and not hidden(p)]
             try:  # an old copy means PortMaster couldn't be reached and the saved list is shown
                 saved = os.path.getmtime(self.cache)
                 self.saved_at = saved if time.time() - saved >= self.MAX_AGE else None

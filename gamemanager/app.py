@@ -29,7 +29,7 @@ from .systems import BY_ID, Device
 from .tasks import Task
 from .ui import C, H, UI, W
 
-APP_VERSION = "2.0.3"
+APP_VERSION = "2.0.4"
 
 
 def remove_replaced_sources(app_dir):
